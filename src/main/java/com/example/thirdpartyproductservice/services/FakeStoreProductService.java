@@ -52,7 +52,7 @@ public class FakeStoreProductService implements ProductService {
     }
 
     @Override
-    public List<Product> getAllProduct(Long id) {
+    public List<Product> getAllProduct() {
         FakeStoreProductDTO[] fakeStoreProductDTO=
                 restTemplate.getForObject("https://fakestoreapi.com/products",FakeStoreProductDTO[].class);
 
