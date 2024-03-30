@@ -85,4 +85,25 @@ public class FakeStoreProductService implements ProductService {
 
         return convertFakeStoreProductDtoToProduct(response);
     }
+
+    @Override
+    public Product addProduct(Product product) {
+        FakeStoreProductDTO fakeStoreProductDTO=new FakeStoreProductDTO();
+
+        fakeStoreProductDTO.setTitle(product.getTitle());
+        fakeStoreProductDTO.setPrice(product.getPrice());
+        fakeStoreProductDTO.setDescription(product.getDescription());
+        fakeStoreProductDTO.setImage(product.getImage());
+        fakeStoreProductDTO.setCategory(product.getCategory().getDescription());
+
+        RequestCallback requestCallback = restTemplate.httpEntityCallback(fakeStoreProductDTO, FakeStoreProductDTO.class);
+        HttpMessageConverterExtractor<FakeStoreProductDTO> responseExtractor = new HttpMessageConverterExtractor(FakeStoreProductDTO.class,
+                restTemplate.getMessageConverters());
+
+        FakeStoreProductDTO response=
+                restTemplate.execute("https://fakestoreapi.com/products", HttpMethod.POST, requestCallback, responseExtractor);
+
+
+        return convertFakeStoreProductDtoToProduct(response);
+    }
 }
