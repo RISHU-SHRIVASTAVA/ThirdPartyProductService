@@ -1,6 +1,7 @@
 package com.example.thirdpartyproductservice.services;
 
 import com.example.thirdpartyproductservice.dtos.FakeStoreProductDTO;
+import com.example.thirdpartyproductservice.exceptions.ProductNotFoundException;
 import com.example.thirdpartyproductservice.model.Category;
 import com.example.thirdpartyproductservice.model.Product;
 import org.springframework.http.HttpMethod;
@@ -37,13 +38,13 @@ public class FakeStoreProductService implements ProductService {
     }
 
     @Override
-    public Product getProductById(Long id) {
+    public Product getProductById(Long id) throws ProductNotFoundException {
         //Call the FakeStore API to get the product with given ID here.
         FakeStoreProductDTO fakeStoreProductDto =
                 restTemplate.getForObject("https://fakestoreapi.com/products/" + id, FakeStoreProductDTO.class);
 
         if (fakeStoreProductDto == null) {
-            return null;
+            throw new ProductNotFoundException(id,"The product with the "+id+" id not found");
         }
 
         //Convert fakeStoreProductDto to product object.

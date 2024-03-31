@@ -1,5 +1,6 @@
 package com.example.thirdpartyproductservice.controller;
 
+import com.example.thirdpartyproductservice.exceptions.ProductNotFoundException;
 import com.example.thirdpartyproductservice.model.Product;
 import com.example.thirdpartyproductservice.services.ProductService;
 import org.springframework.http.HttpStatus;
@@ -23,11 +24,11 @@ public class ProductController {
         return  productService.getProductById(id);
     }*/
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable("id") Long id){
+    public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) throws ProductNotFoundException {
         Product product=productService.getProductById(id);
-        if(product==null){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+//        if(product==null){
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
     @GetMapping()
