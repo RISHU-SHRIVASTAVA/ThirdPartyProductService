@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-@Service
+@Service("fakeStoreService")
 public class FakeStoreProductService implements ProductService {
     private RestTemplate restTemplate;
 
@@ -29,7 +29,7 @@ public class FakeStoreProductService implements ProductService {
         product.setPrice(fakeStoreProductDto.getPrice());
 
         Category category = new Category();
-        category.setDescription(fakeStoreProductDto.getCategory());
+        category.setTitle(fakeStoreProductDto.getCategory());
         category.setId(fakeStoreProductDto.getId());
 
         product.setCategory(category);
@@ -88,6 +88,21 @@ public class FakeStoreProductService implements ProductService {
     }
 
     @Override
+    public Product createProduct(Product product) {
+        return null;
+    }
+
+    @Override
+    public Product updateProduct(Long id, Product product) {
+        return null;
+    }
+
+    @Override
+    public void deleteProduct() {
+
+    }
+
+   /* @Override
     public Product addProduct(Product product) {
         FakeStoreProductDTO fakeStoreProductDTO=new FakeStoreProductDTO();
 
@@ -106,5 +121,5 @@ public class FakeStoreProductService implements ProductService {
 
 
         return convertFakeStoreProductDtoToProduct(response);
-    }
+    }*/
 }
