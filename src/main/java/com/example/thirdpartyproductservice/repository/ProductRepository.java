@@ -36,7 +36,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     //HQL
     @Query("select p.title as title, p.description as description from Product p where p.id = :id")
-    ProductWithTitleAndDescription someRandomQuery(@Param("id") Long id);
+    ProductWithTitleAndDescription someeRandomQuery(@Param("id") Long id);
 
     //SQL Query -> native query
     @Query(value = "select title, description from product where id = :id", nativeQuery = true)

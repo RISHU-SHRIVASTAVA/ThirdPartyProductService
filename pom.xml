@@ -63,6 +63,14 @@
 			<artifactId>flyway-mysql</artifactId>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
 
 
 
