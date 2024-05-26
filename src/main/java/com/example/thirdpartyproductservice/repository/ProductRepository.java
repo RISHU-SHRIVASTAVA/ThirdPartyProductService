@@ -2,6 +2,8 @@ package com.example.thirdpartyproductservice.repository;
 
 import com.example.thirdpartyproductservice.model.Product;
 import com.example.thirdpartyproductservice.projection.ProductWithTitleAndDescription;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,34 +16,31 @@ import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-
     @Override
     Optional<Product> findById(Long id);
 
-    Optional<Product> findByTitle(String word);
-
-//    List<Product> findByTitle(String word);
+    List<Product> findByTitle(String word);
 
     List<Product> findByTitleContains(String str);
 
+    //select * from products where title = <> and description = <>
+    List<Product> findByTitleAndDescription(String title, String description);
+
     Optional<Product> findByImage(String url);
+
     @Override
     void delete(Product entity);
 
-    Product save(Product product); // create and update
-
-    //HQL
-    @Query("select p.title, p.description from Product p where p.id = :id")
-    Product someRandomQuery(@Param("id") Long id);
+    Product save(Product product); //create and update
 
     //HQL
     @Query("select p.title as title, p.description as description from Product p where p.id = :id")
-    ProductWithTitleAndDescription someeRandomQuery(@Param("id") Long id);
+    ProductWithTitleAndDescription someRandomQuery(@Param("id") Long id);
 
     //SQL Query -> native query
     @Query(value = "select title, description from product where id = :id", nativeQuery = true)
     ProductWithTitleAndDescription someOtherRandomQuery(@Param("id") Long id);
 
-
-
+    @Override
+    Page<Product> findAll(Pageable pageable);
 }

@@ -3,9 +3,10 @@ package com.example.thirdpartyproductservice.dtos;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Getter
 @Setter
-public class FakeStoreProductDTO {
+public class FakeStoreProductDto {
     private Long id;
     private String title;
     private double price;

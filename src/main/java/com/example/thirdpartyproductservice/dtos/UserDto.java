@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class UserDTO {
+public class UserDto {
     private String name;
     private String email;
     private List<Role> roles;
